@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site de Divertissement</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        header { background: #333; color: #fff; padding: 1em 2em; }
+        nav { background: #444; }
+        .menu { list-style: none; margin: 0; padding: 0; display: flex; }
+        .menu > li { position: relative; }
+        .menu > li > a { display: block; padding: 1em 1.5em; color: #fff; text-decoration: none; }
+        .menu > li:hover { background: #555; }
+        .submenu { display: none; position: absolute; left: 0; top: 100%; background: #555; min-width: 160px; }
+        .submenu li a { padding: 1em; color: #fff; display: block; text-decoration: none; }
+        .menu > li:hover .submenu { display: block; }
+        main { padding: 2em; }
+        .hidden { display: none; }
+    </style>
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('section').forEach(sec => sec.classList.add('hidden'));
+            document.getElementById(sectionId).classList.remove('hidden');
+        }
+        window.onload = function() {
+            showSection('accueil');
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Bienvenue sur mon site de divertissement</h1>
+    </header>
+    <nav>
+        <ul class="menu">
+            <li><a href="#" onclick="showSection('accueil')">Accueil</a></li>
+            <li>
+                <a href="#">Menu</a>
+                <ul class="submenu">
+                    <li><a href="#" onclick="showSection('cv')">CV</a></li>
+                    <li><a href="#" onclick="showSection('morpion')">Jeu : Morpion</a></li>
+                    <!-- Ajoute d'autres liens ici -->
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <main>
+        <section id="accueil">
+            <h2>Accueil</h2>
+            <p>Bienvenue ! Utilisez le menu pour explorer les différentes sections du site.</p>
+        </section>
+        <section id="cv" class="hidden">
+            <h2>Mon CV</h2>
+            <p>Ici, vous pourrez consulter mon CV.</p>
+        </section>
+        <section id="morpion" class="hidden">
+            <h2>Jeu : Morpion</h2>
+            <p>Le jeu Morpion sera disponible ici prochainement.</p>
+        </section>
+    </main>
+</body>
+</html>
