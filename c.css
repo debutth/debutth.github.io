@@ -216,6 +216,83 @@ section {
     padding-left: 0.5em;
 }
 
+/* Accueil styles */
+.accueil-hero {
+    background: linear-gradient(90deg, #4f8cff 0%, #6a5af9 100%);
+    color: #fff;
+    padding: 2.5em 1em 2em 1em;
+    border-radius: 18px;
+    text-align: center;
+    margin-bottom: 2em;
+    box-shadow: 0 4px 24px rgba(80,80,160,0.10);
+    animation: fadeIn 0.8s;
+}
+.accueil-hero h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+    letter-spacing: 2px;
+}
+.accueil-desc {
+    font-size: 1.2em;
+    margin-bottom: 1.5em;
+    line-height: 1.6;
+}
+.accueil-btns {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    flex-wrap: wrap;
+}
+.btn-hero {
+    background: #fff;
+    color: #4f8cff;
+    padding: 0.7em 1.5em;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(80,80,160,0.10);
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+    margin-bottom: 0.5em;
+}
+.btn-hero:hover {
+    background: #e3e7ed;
+    color: #6a5af9;
+    transform: scale(1.07);
+}
+.accueil-cards {
+    display: flex;
+    gap: 2em;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1em;
+}
+.card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(80,80,160,0.10);
+    padding: 1.5em 1em;
+    width: 220px;
+    text-align: center;
+    transition: box-shadow 0.2s, transform 0.2s;
+    animation: fadeIn 1.2s;
+}
+.card:hover {
+    box-shadow: 0 6px 24px rgba(80,80,160,0.18);
+    transform: translateY(-6px) scale(1.04);
+}
+.card .emoji {
+    font-size: 2.2em;
+    display: block;
+    margin-bottom: 0.5em;
+}
+.card h3 {
+    margin: 0.5em 0 0.3em 0;
+    color: #4f8cff;
+}
+.card p {
+    color: #222;
+    font-size: 1em;
+}
 @media (max-width: 700px) {
     main {
         padding: 1em;
@@ -229,6 +306,14 @@ section {
         padding: 1em;
         border-radius: 6px;
     }
+    .accueil-cards {
+        flex-direction: column;
+        align-items: center;
+        gap: 1em;
+    }
+    .card {
+        width: 90%;
+    }
 }
 @media (max-width: 900px) {
     .cv-flex {
@@ -238,4 +323,10 @@ section {
     .cv-flex img {
         max-width: 100%;
     }
+}
+.demineur-cell {
+    box-sizing: border-box;
+}
+.demineur-cell:hover {
+    background: #dbeafe;
 }

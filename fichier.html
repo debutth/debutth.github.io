@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Site de Divertissement</title>
     <link rel="stylesheet" href="c.css">
+    <script src="j.js" defer></script>
     <script>
         function showSection(sectionId) {
             document.querySelectorAll('section').forEach(sec => sec.classList.add('hidden'));
@@ -27,14 +28,43 @@
                 <ul class="submenu">
                     <li><a href="#" onclick="showSection('cv')">CV</a></li>
                     <li><a href="#" onclick="showSection('morpion')">Jeu : Morpion</a></li>
+                    <li><a href="#" onclick="showSection('demineur')">Jeu : Démineur</a></li>
                 </ul>
             </li>
         </ul>
     </nav>
     <main>
         <section id="accueil">
-            <h2>Accueil</h2>
-            <p>Bienvenue ! Utilisez le menu pour explorer les différentes sections du site.</p>
+            <div class="accueil-hero">
+                <h1>Bienvenue sur mon site !</h1>
+                <p class="accueil-desc">
+                    Je m'appelle Thomas DEBUT.<br>
+                    Passionné par l'informatique, l'ingénierie et le web.<br>
+                    Découvre mon parcours, mes compétences et amuse-toi avec mes jeux interactifs !
+                </p>
+                <div class="accueil-btns">
+                    <a href="#" onclick="showSection('cv')" class="btn-hero">Voir mon CV</a>
+                    <a href="#" onclick="showSection('morpion')" class="btn-hero">Jouer au Morpion</a>
+                    <a href="#" onclick="showSection('demineur')" class="btn-hero">Jouer au Démineur</a>
+                </div>
+            </div>
+            <div class="accueil-cards">
+                <div class="card">
+                    <span class="emoji">💼</span>
+                    <h3>Mon parcours</h3>
+                    <p>Retrouve mon cursus et mes expériences.</p>
+                </div>
+                <div class="card">
+                    <span class="emoji">🧠</span>
+                    <h3>Compétences</h3>
+                    <p>Découvre mes savoir-faire en informatique et communication.</p>
+                </div>
+                <div class="card">
+                    <span class="emoji">🎮</span>
+                    <h3>Jeux</h3>
+                    <p>Teste tes réflexes avec le Morpion et le Démineur !</p>
+                </div>
+            </div>
         </section>
         <section id="cv" class="hidden">
             <h2>Mon CV</h2>
@@ -152,7 +182,29 @@
         </section>
         <section id="morpion" class="hidden">
             <h2>Jeu : Morpion</h2>
-            <p>Le jeu Morpion sera disponible ici prochainement.</p>
+            <div id="morpion-game" style="display:flex;flex-direction:column;align-items:center;">
+                <div id="morpion-board" style="display:grid;grid-template-columns:repeat(3,70px);grid-template-rows:repeat(3,70px);gap:8px;margin-bottom:1em;">
+                    <!-- Les cases seront générées par JS -->
+                </div>
+                <div id="morpion-status" style="font-weight:bold;color:#4f8cff;margin-bottom:1em;">À toi de jouer !</div>
+                <button id="morpion-reset" style="background:#4f8cff;color:#fff;padding:0.5em 1.2em;border:none;border-radius:8px;cursor:pointer;font-weight:500;">Recommencer</button>
+            </div>
+        </section>
+        <section id="demineur" class="hidden">
+            <h2>Jeu : Démineur</h2>
+            <div id="demineur-game" style="display:flex;flex-direction:column;align-items:center;">
+                <div style="margin-bottom:1em;">
+                    <label for="demineur-diff" style="font-weight:500;">Difficulté :</label>
+                    <select id="demineur-diff" style="padding:0.3em 1em;border-radius:6px;">
+                        <option value="facile">Facile (6x6, 6 mines)</option>
+                        <option value="moyen">Moyen (8x8, 12 mines)</option>
+                        <option value="difficile">Difficile (10x10, 20 mines)</option>
+                    </select>
+                    <button id="demineur-reset" style="background:#4f8cff;color:#fff;padding:0.5em 1.2em;border:none;border-radius:8px;cursor:pointer;font-weight:500;margin-left:1em;">Nouvelle partie</button>
+                </div>
+                <div id="demineur-board" style="margin-bottom:1em;"></div>
+                <div id="demineur-status" style="font-weight:bold;color:#4f8cff;"></div>
+            </div>
         </section>
     </main>
     <!-- Modale pour zoomer l'image -->
