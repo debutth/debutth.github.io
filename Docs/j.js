@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const boardDiv = document.getElementById('demineur-board');
     const statusDiv = document.getElementById('demineur-status');
 
-    let rows = 6, cols = 6, mines = 6;
+    let rows = 8, cols = 8, mines = 6;
     let board = [];
     let revealed = [];
     let flagged = [];
@@ -84,9 +84,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function setDifficulty() {
         const diff = diffSelect.value;
-        if (diff === "facile") { rows = 6; cols = 6; mines = 6; }
-        else if (diff === "moyen") { rows = 8; cols = 8; mines = 12; }
-        else { rows = 10; cols = 10; mines = 20; }
+        if (diff === "facile") { rows = 8; cols = 8; mines = 6; }
+        else if (diff === "moyen") { rows = 10; cols = 10; mines = 12; }
+        else { rows = 12; cols = 12; mines = 18; }
     }
 
     function initBoard() {
