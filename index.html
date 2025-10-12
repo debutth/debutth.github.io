@@ -24,13 +24,21 @@
         <ul class="menu">
             <li><a href="#" onclick="showSection('accueil')">Accueil</a></li>
             <li>
-                <a href="#">Menu</a>
+                <a href="#">Professionnel</a>
                 <ul class="submenu">
                     <li><a href="#" onclick="showSection('cv')">CV</a></li>
-                    <li><a href="#" onclick="showSection('morpion')">Jeu : Morpion</a></li>
-                    <li><a href="#" onclick="showSection('demineur')">Jeu : Démineur</a></li>
+                    <li><a href="#" onclick="showSection('portfolio')">Portfolio</a></li>
                 </ul>
             </li>
+            <li>
+                <a href="#">Jeux</a>
+                <ul class="submenu">
+                    <li><a href="#" onclick="showSection('morpion')">Morpion</a></li>
+                    <li><a href="#" onclick="showSection('demineur')">Démineur</a></li>
+                    <li><a href="#" onclick="showSection('sudoku')">Sudoku</a></li>
+                </ul>
+            </li>
+            
         </ul>
     </nav>
     <main>
@@ -180,6 +188,31 @@
                 </div>
             </div>
         </section>
+        <section id="portfolio" class="hidden">
+            <h2>Portfolio</h2>
+            <div class="portfolio-block">
+                <div class="portfolio-grid">
+                    <div class="portfolio-item">
+                        <img src="image/projet1.jpg" alt="Projet 1" class="portfolio-img">
+                        <h3>Site vitrine</h3>
+                        <p>Création d'un site vitrine (ce site)</p>
+                        <a href="https://debutth.github.io/#" target="_blank" class="portfolio-btn">Voir le projet</a>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="image/projet2.jpg" alt="Projet 2" class="portfolio-img">
+                        <h3>...</h3>
+                        <p>...<br> ... </p>
+                        <a href="..." target="_blank" class="portfolio-btn">Voir le projet</a>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="image/projet3.jpg" alt="Projet 3" class="portfolio-img">
+                        <h3>Jeu échec web</h3>
+                        <p>Conception d'un mini-jeu d'échec interactif (pas de multi)</p>
+                        <a href="https://exemple-projet3.com" target="_blank" class="portfolio-btn">Voir le projet</a>
+                    </div>
+                </div>
+            </div>
+        </section>
         <section id="morpion" class="hidden">
             <h2>Jeu : Morpion</h2>
             <div id="morpion-game" style="display:flex;flex-direction:column;align-items:center;">
@@ -204,6 +237,22 @@
                 </div>
                 <div id="demineur-board" style="margin-bottom:1em;"></div>
                 <div id="demineur-status" style="font-weight:bold;color:#4f8cff;"></div>
+            </div>
+        </section>
+        <section id="sudoku" class="hidden">
+            <h2>Jeu : Sudoku</h2>
+            <div id="sudoku-game" style="display:flex;flex-direction:column;align-items:center;">
+                <div style="margin-bottom:1em;">
+                    <label for="sudoku-diff" style="font-weight:500;">Difficulté :</label>
+                    <select id="sudoku-diff" style="padding:0.3em 1em;border-radius:6px;">
+                        <option value="easy">Facile</option>
+                        <option value="medium">Moyen</option>
+                        <option value="hard">Difficile</option>
+                    </select>
+                    <button id="sudoku-reset" style="background:#4f8cff;color:#fff;padding:0.5em 1.2em;border:none;border-radius:8px;cursor:pointer;font-weight:500;margin-left:1em;">Nouvelle partie</button>
+                </div>
+                <div id="sudoku-board" style="margin-bottom:1em;"></div>
+                <div id="sudoku-status" style="font-weight:bold;color:#4f8cff;"></div>
             </div>
         </section>
     </main>

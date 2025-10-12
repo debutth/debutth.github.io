@@ -217,3 +217,136 @@ document.addEventListener('DOMContentLoaded', function() {
         startGame();
     }
 });
+
+// Sudoku JS
+document.addEventListener('DOMContentLoaded', function() {
+    const sudokuDiff = document.getElementById('sudoku-diff');
+    const sudokuReset = document.getElementById('sudoku-reset');
+    const sudokuBoard = document.getElementById('sudoku-board');
+    const sudokuStatus = document.getElementById('sudoku-status');
+
+    // Quelques grilles de départ (facile, moyen, difficile)
+    const puzzles = {
+        easy: [
+            "530070000600195000098000060800060003400803001700020006060000280000419005000080079",
+            "000260701680070090190004500820100040004602900050083026009300074040050036703018000"
+        ],
+        medium: [
+            "005300000800000020070010500400005300010070006003200080060500009004000030000009700",
+            "100920000524010000000000070050008102000000000402700090060000000000030945000071006"
+        ],
+        hard: [
+            "000000907000420180000705026100904000050000040000507009920108000034059000507000000",
+            "030050040008010500460000012070502080000000000040109030250000098001020600080060020"
+        ]
+    };
+
+    let solution = [];
+    let initial = [];
+    let cells = [];
+
+    function generatePuzzle() {
+        let diff = sudokuDiff.value;
+        let puzzleStr = puzzles[diff][Math.floor(Math.random() * puzzles[diff].length)];
+        initial = puzzleStr.split('').map(n => n === "0" ? "" : n);
+        solution = solveSudoku(puzzleStr.split('').map(n => n === "0" ? "" : n));
+    }
+
+    function renderBoard() {
+        sudokuBoard.innerHTML = "";
+        cells = [];
+        sudokuBoard.style.display = "grid";
+        sudokuBoard.style.gridTemplateColumns = "repeat(9, 36px)";
+        sudokuBoard.style.gridTemplateRows = "repeat(9, 36px)";
+        sudokuBoard.style.gap = "2px";
+        for (let i = 0; i < 81; i++) {
+            let cell = document.createElement('input');
+            cell.type = "text";
+            cell.maxLength = 1;
+            cell.className = "sudoku-cell";
+            cell.style.cssText = "background:#fff;border-radius:6px;box-shadow:0 2px 8px rgba(80,80,160,0.10);display:flex;align-items:center;justify-content:center;font-size:1.2em;text-align:center;height:36px;width:36px;border:1px solid #e3e7ed;outline:none;transition:background 0.2s;";
+            if (initial[i]) {
+                cell.value = initial[i];
+                cell.disabled = true;
+                cell.style.background = "#e3e7ed";
+                cell.style.fontWeight = "bold";
+                cell.style.color = "#4f8cff";
+            } else {
+                cell.value = "";
+                cell.style.color = "#222";
+                cell.addEventListener('input', function() {
+                    cell.value = cell.value.replace(/[^1-9]/g, "");
+                    checkSudoku();
+                });
+            }
+            // Bordures pour le style Sudoku
+            if (i % 9 === 2 || i % 9 === 5) cell.style.borderRight = "2px solid #4f8cff";
+            if (i % 9 === 3 || i % 9 === 6) cell.style.borderLeft = "2px solid #4f8cff";
+            if (Math.floor(i / 9) === 2 || Math.floor(i / 9) === 5) cell.style.borderBottom = "2px solid #4f8cff";
+            if (Math.floor(i / 9) === 3 || Math.floor(i / 9) === 6) cell.style.borderTop = "2px solid #4f8cff";
+            sudokuBoard.appendChild(cell);
+            cells.push(cell);
+        }
+        sudokuStatus.textContent = "Remplis la grille et valide !";
+    }
+
+    function checkSudoku() {
+        let userGrid = cells.map(cell => cell.value || "");
+        for (let i = 0; i < 81; i++) {
+            if (userGrid[i] !== solution[i]) {
+                sudokuStatus.textContent = "Il y a des erreurs ou la grille n'est pas complète.";
+                return;
+            }
+        }
+        sudokuStatus.textContent = "🎉 Bravo ! Sudoku résolu !";
+    }
+
+    function startSudoku() {
+        generatePuzzle();
+        renderBoard();
+    }
+
+    if (sudokuDiff && sudokuReset) {
+        sudokuDiff.addEventListener('change', startSudoku);
+        sudokuReset.addEventListener('click', startSudoku);
+        startSudoku();
+    }
+
+    // Solveur simple (backtracking)
+    function solveSudoku(grid) {
+        function isValid(grid, row, col, num) {
+            for (let x = 0; x < 9; x++) {
+                if (grid[row * 9 + x] == num) return false;
+                if (grid[x * 9 + col] == num) return false;
+            }
+            let startRow = Math.floor(row / 3) * 3;
+            let startCol = Math.floor(col / 3) * 3;
+            for (let r = startRow; r < startRow + 3; r++) {
+                for (let c = startCol; c < startCol + 3; c++) {
+                    if (grid[r * 9 + c] == num) return false;
+                }
+            }
+            return true;
+        }
+        function solve(grid) {
+            for (let i = 0; i < 81; i++) {
+                if (!grid[i]) {
+                    let row = Math.floor(i / 9), col = i % 9;
+                    for (let num = 1; num <= 9; num++) {
+                        if (isValid(grid, row, col, String(num))) {
+                            grid[i] = String(num);
+                            if (solve(grid)) return true;
+                            grid[i] = "";
+                        }
+                    }
+                    return false;
+                }
+            }
+            return true;
+        }
+        let gridCopy = grid.slice();
+        solve(gridCopy);
+        return gridCopy;
+    }
+});
+
