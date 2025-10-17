@@ -18,15 +18,13 @@ jobs:
           submodules: recursive
 
       # Étape 2 : (facultatif) Construire ton site s’il y a un script
-      # Par exemple si c’est un site Jekyll, Hugo, React, etc.
       - name: Build site
         run: |
           echo "Construire le site ici"
           # Exemple pour Jekyll :
           # bundle install && bundle exec jekyll build
 
-      # Étape 3 : (facultatif) Déploiement GitHub Pages
-      # Si ton site doit être publié automatiquement
+      # Étape 3 : Déploiement GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
