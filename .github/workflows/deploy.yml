@@ -1,0 +1,34 @@
+name: Deploy site with submodules
+
+on:
+  push:
+    branches:
+      - main  # ou 'master' selon ta branche par défaut
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Étape 1 : Récupérer le dépôt avec le sous-module privé
+      - name: Checkout repository (with submodules)
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PERSONAL_TOKEN }}  # 🔒 ton token secret créé à l'étape 2
+          submodules: recursive
+
+      # Étape 2 : (facultatif) Construire ton site s’il y a un script
+      # Par exemple si c’est un site Jekyll, Hugo, React, etc.
+      - name: Build site
+        run: |
+          echo "Construire le site ici"
+          # Exemple pour Jekyll :
+          # bundle install && bundle exec jekyll build
+
+      # Étape 3 : (facultatif) Déploiement GitHub Pages
+      # Si ton site doit être publié automatiquement
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site  # adapte selon ton dossier de sortie
