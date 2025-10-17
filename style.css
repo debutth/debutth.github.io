@@ -1,0 +1,430 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(120deg, #f8fafc 0%, #e3e7ed 100%);
+    color: #222;
+}
+header {
+    background: linear-gradient(90deg, #4f8cff 0%, #6a5af9 100%);
+    color: #fff;
+    padding: 2em 0;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(80,80,160,0.08);
+}
+header h1 {
+    margin: 0;
+    font-size: 2.2em;
+    letter-spacing: 2px;
+    /* animation/interaction */
+    transition: transform 250ms ease, text-shadow 250ms ease, color 250ms ease;
+    display: inline-block; /* nécessaire pour le transform */
+    will-change: transform, text-shadow;
+}
+/* effet sympa au survol du header (zoom + léger lift + ombre) */
+header:hover h1 {
+    transform: scale(1.06) translateY(-4px);
+    text-shadow: 0 12px 30px rgba(80,80,160,0.16);
+    color: #ffffff;
+}
+header h1:active {
+    transform: scale(0.99) translateY(-2px);
+    transition: transform 120ms ease;
+}
+h2 {
+    margin: 0px 0 20px 0;
+    font-size: 1.7em;
+    letter-spacing: 2px;
+    text-align: center;
+}
+nav {
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(80,80,160,0.08);
+}
+.menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+.menu > li {
+    position: relative;
+}
+.menu > li > a {
+    display: block;
+    padding: 1em 2em;
+    color: #4f8cff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+    border-radius: 6px 6px 0 0;
+}
+.menu > li:hover > a,
+.menu > li > a:focus {
+    background: #e3e7ed;
+    color: #6a5af9;
+}
+.submenu {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    background: #fff;
+    min-width: 180px;
+    box-shadow: 0 4px 16px rgba(80,80,160,0.12);
+    border-radius: 0 0 8px 8px;
+    z-index: 10;
+}
+.menu > li:hover .submenu {
+    display: block;
+}
+.submenu li a {
+    padding: 1em;
+    color: #4f8cff;
+    display: block;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+    border-radius: 0 0 8px 8px;
+}
+.submenu li a:hover,
+.submenu li a:focus {
+    background: #e3e7ed;
+    color: #6a5af9;
+}
+main {
+    padding: 2em;
+    max-width: 780px; /* au lieu de 700px */
+    margin: 2em auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(80,80,160,0.10);
+}
+section {
+    animation: fadeIn 0.5s;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+.hidden {
+    display: none;
+}
+.cv-flex {
+    display: flex;
+    gap: 2em;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+.cv-flex img {
+    max-width: 450px;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(80,80,160,0.12);
+}
+.cv-recap {
+    flex: 0 0 260px; /* largeur fixe plus petite */
+    min-width: 180px;
+    max-width: 260px;
+    background: #f8fafc;
+    border-radius: 12px; /* arrondi plus marqué */
+    box-shadow: 0 2px 12px rgba(80,80,160,0.08);
+    padding: 1.2em 1em;
+    border-left: 4px solid #4f8cff; /* bordure colorée à gauche */
+    transition: box-shadow 0.2s;
+}
+.cv-recap:hover {
+    box-shadow: 0 4px 24px rgba(80,80,160,0.15);
+}
+/* Modale zoom image CV */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+}
+.modal-content {
+    max-width: 90vw;
+    max-height: 90vh;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(80,80,160,0.20);
+    display: block;
+    margin: auto;
+}
+.close {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    color: #fff;
+    font-size: 3em;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1001;
+    transition: color 0.2s;
+}
+.close:hover {
+    color: #4f8cff;
+}
+/* Animation bouton PDF */
+.btn-cv {
+    display: inline-block;
+    background: #4f8cff;
+    color: #fff;
+    padding: 0.7em 1.2em;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(80,80,160,0.10);
+    transition: transform 0.2s, background 0.2s;
+}
+.btn-cv:hover {
+    transform: scale(1.08);
+    background: #6a5af9;
+}
+
+/* Animation compétences */
+.cv-recap ul li[style*="display:flex"]:hover {
+    background: #e3e7ed;
+    border-radius: 6px;
+    transform: translateX(8px);
+    transition: background 0.2s, transform 0.2s;
+}
+.cv-recap ul li[style*="display:flex"] span {
+    transition: text-decoration 0.2s;
+}
+.cv-recap ul li[style*="display:flex"]:hover span {
+    text-decoration: underline;
+}
+
+/* Animation centres d’intérêt */
+.cv-recap ul li:hover {
+    color: #1d7fee;
+    transition: color 0.2s;
+}
+
+/* Timeline styles */
+.timeline-block {
+    flex: 0 0 95%;
+    max-width: 420px; /* largeur maximale du bloc */
+    background: #f8fafc;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(80,80,160,0.08);
+    padding: 1.2em 1em;
+    margin-top: 2em;
+    border-left: 4px solid #4f8cff;
+    transition: box-shadow 0.2s;
+}
+.timeline-block:hover {
+    box-shadow: 0 4px 24px rgba(80,80,160,0.15);
+}
+.timeline-block h3 {
+    margin-top: 0;
+    margin-bottom: 1em;
+}
+.timeline-block ul li {
+    padding-left: 0.5em;
+}
+
+/* Accueil styles */
+.accueil-hero {
+    background: linear-gradient(90deg, #4f8cff 0%, #6a5af9 100%);
+    color: #fff;
+    padding: 2.5em 1em 2em 1em;
+    border-radius: 18px;
+    text-align: center;
+    margin-bottom: 2em;
+    box-shadow: 0 4px 24px rgba(80,80,160,0.10);
+    animation: fadeIn 0.8s;
+}
+.accueil-hero h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+    letter-spacing: 2px;
+}
+.accueil-desc {
+    font-size: 1.2em;
+    margin-bottom: 1.5em;
+    line-height: 1.6;
+}
+.accueil-btns {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    flex-wrap: wrap;
+}
+.btn-hero {
+    background: #fff;
+    color: #4f8cff;
+    padding: 0.7em 1.5em;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(80,80,160,0.10);
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+    margin-bottom: 0.5em;
+}
+.btn-hero:hover {
+    background: #e3e7ed;
+    color: #6a5af9;
+    transform: scale(1.07);
+}
+.accueil-cards {
+    display: flex;
+    gap: 2em;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1em;
+}
+.card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(80,80,160,0.10);
+    padding: 1.5em 1em;
+    width: 220px;
+    text-align: center;
+    transition: box-shadow 0.2s, transform 0.2s;
+    animation: fadeIn 1.2s;
+}
+.card:hover {
+    box-shadow: 0 6px 24px rgba(80,80,160,0.18);
+    transform: translateY(-6px) scale(1.04);
+}
+.card .emoji {
+    font-size: 2.2em;
+    display: block;
+    margin-bottom: 0.5em;
+}
+.card h3 {
+    margin: 0.5em 0 0.3em 0;
+    color: #4f8cff;
+}
+.card p {
+    color: #222;
+    font-size: 1em;
+}
+.portfolio-block {
+    background: #f8fafc;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(80,80,160,0.10);
+    padding: 2em 1em;
+    margin: 2em auto;
+}
+.portfolio-grid {
+    display: flex;
+    gap: 2em;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.portfolio-item {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(80,80,160,0.08);
+    padding: 1em;
+    width: 220px;
+    text-align: center;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+.portfolio-item:hover {
+    box-shadow: 0 6px 24px rgba(80,80,160,0.18);
+    transform: translateY(-6px) scale(1.04);
+}
+.portfolio-img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 0.7em;
+    box-shadow: 0 2px 8px rgba(80,80,160,0.08);
+}
+.portfolio-btn {
+    display: inline-block;
+    margin-top: 0.7em;
+    background: #4f8cff;
+    color: #fff;
+    padding: 0.5em 1.2em;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(80,80,160,0.10);
+    transition: background 0.2s, transform 0.2s;
+}
+.portfolio-btn:hover {
+    background: #6a5af9;
+    transform: scale(1.07);
+}
+
+/* Snake */
+#snake-canvas {
+    margin-bottom: 1em;
+    border: 2px solid #4f8cff;
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(80,80,160,0.10);
+}
+
+/* 2048 */
+#game2048-board {
+    margin-bottom: 1em;
+}
+.game2048-cell {
+    box-sizing: border-box;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(80,80,160,0.10);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3em;
+    font-weight: 600;
+    height: 60px;
+    width: 60px;
+    transition: background 0.2s;
+}
+.game2048-cell:not(:empty) {
+    background: #e3e7ed;
+    color: #4f8cff;
+}
+
+@media (max-width: 700px) {
+    main {
+        padding: 1em;
+        margin: 1em;
+    }
+    .menu {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .menu > li > a {
+        padding: 1em;
+        border-radius: 6px;
+    }
+    .accueil-cards {
+        flex-direction: column;
+        align-items: center;
+        gap: 1em;
+    }
+    .card {
+        width: 90%;
+    }
+    .portfolio-grid {
+        flex-direction: column;
+        align-items: center;
+        gap: 1em;
+    }
+    .portfolio-item {
+        width: 90%;
+    }
+}
+@media (max-width: 900px) {
+    .cv-flex {
+        flex-direction: column;
+        gap: 1em;
+    }
+    .cv-flex img {
+        max-width: 100%;
+    }
+}
