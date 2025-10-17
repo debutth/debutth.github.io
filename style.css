@@ -16,6 +16,20 @@ header h1 {
     margin: 0;
     font-size: 2.2em;
     letter-spacing: 2px;
+    /* animation/interaction */
+    transition: transform 250ms ease, text-shadow 250ms ease, color 250ms ease;
+    display: inline-block; /* nécessaire pour le transform */
+    will-change: transform, text-shadow;
+}
+/* effet sympa au survol du header (zoom + léger lift + ombre) */
+header:hover h1 {
+    transform: scale(1.06) translateY(-4px);
+    text-shadow: 0 12px 30px rgba(80,80,160,0.16);
+    color: #ffffff;
+}
+header h1:active {
+    transform: scale(0.99) translateY(-2px);
+    transition: transform 120ms ease;
 }
 h2 {
     margin: 0px 0 20px 0;
